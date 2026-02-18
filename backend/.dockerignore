@@ -1,0 +1,10 @@
+npm-debug.log
+.env
+.env.local
+.git
+.gitignore
+*.md
+prasaran.db
+src
+tsconfig.json
+nest-cli.json
