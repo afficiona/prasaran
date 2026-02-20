@@ -179,7 +179,7 @@ function DashboardContent() {
                     </span>
                   </div>
                 )}
-                <div className="text-sm">
+                <div className="hidden sm:block text-sm">
                   <div className="font-semibold text-gray-800">{user.email.split('@')[0]}</div>
                   <div className="text-xs text-gray-500">{user.email}</div>
                 </div>
