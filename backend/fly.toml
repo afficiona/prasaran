@@ -27,3 +27,8 @@ primary_region = 'sjc'
 [env]
   PORT = "3001"
   NODE_ENV = "production"
+  DATABASE_PATH = "/app/data/prasaran.db"
+
+[mounts]
+  source = "prasaran_data"
+  destination = "/app/data"

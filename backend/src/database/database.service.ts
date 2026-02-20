@@ -8,7 +8,8 @@ export class DatabaseService implements OnModuleInit {
 
   onModuleInit() {
     const DatabaseConstructor = (Database as any).default || Database;
-    this.db = new DatabaseConstructor(path.join(__dirname, '../../prasaran.db'));
+    const dbPath = process.env.DATABASE_PATH || path.join(__dirname, '../../prasaran.db');
+    this.db = new DatabaseConstructor(dbPath);
     this.initializeTables();
   }
 
