@@ -13,6 +13,8 @@ export class OAuthCallbackController {
     @Query('platform') platform: string,
     @Res() res: Response,
   ) {
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3003';
+
     try {
       // For POC, we need to extract userId from state
       // In a real app, we'd decode the state properly
@@ -20,7 +22,7 @@ export class OAuthCallbackController {
       const stateRecord = db.prepare('SELECT * FROM oauth_states WHERE state = ?').get(state) as any;
 
       if (!stateRecord) {
-        return res.redirect('http://localhost:3003/dashboard?error=Invalid+state');
+        return res.redirect(`${frontendUrl}/dashboard?error=Invalid+state`);
       }
 
       // Use the platform parameter from the query string
@@ -28,9 +30,9 @@ export class OAuthCallbackController {
       await this.platformsService.handleOAuthCallback(code, state, stateRecord.user_id, platformName);
 
       // Redirect back to Prasaran frontend
-      res.redirect('http://localhost:3003/dashboard?connected=true');
+      res.redirect(`${frontendUrl}/dashboard?connected=true`);
     } catch (error) {
-      res.redirect(`http://localhost:3003/dashboard?error=${encodeURIComponent((error as Error).message)}`);
+      res.redirect(`${frontendUrl}/dashboard?error=${encodeURIComponent((error as Error).message)}`);
     }
   }
 }
