@@ -30,6 +30,7 @@ export class AuthController {
     const token = this.authService.generateJwtToken(user);
 
     // Redirect to frontend with token
-    res.redirect(`http://localhost:3003/auth/callback?token=${token}`);
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3003';
+    res.redirect(`${frontendUrl}/auth/callback?token=${token}`);
   }
 }
