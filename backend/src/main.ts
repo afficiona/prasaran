@@ -14,6 +14,7 @@ async function bootstrap() {
       'http://localhost:3001', 'http://localhost:3003', // Prasaran
       'http://localhost:3100', 'http://localhost:3102', // Adda
       'http://localhost:3200', 'http://localhost:3202', // Samooh
+      'https://prasaran.vercel.app', // Prasaran production
     ],
     credentials: true,
   });

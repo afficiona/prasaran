@@ -63,6 +63,7 @@ class ApiClient {
     const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: 'POST',
       headers: this.getHeaders(),
+      credentials: 'include',
       body: JSON.stringify({ email, password }),
     });
 
@@ -78,6 +79,7 @@ class ApiClient {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: 'POST',
       headers: this.getHeaders(),
+      credentials: 'include',
       body: JSON.stringify({ email, password }),
     });
 
@@ -95,6 +97,7 @@ class ApiClient {
   async getConnectedPlatforms(): Promise<Platform[]> {
     const response = await fetch(`${API_BASE_URL}/platforms`, {
       headers: this.getHeaders(true),
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -107,6 +110,7 @@ class ApiClient {
   async getConnectUrl(platform: string): Promise<{ authUrl: string }> {
     const response = await fetch(`${API_BASE_URL}/platforms/connect?platform=${platform}`, {
       headers: this.getHeaders(true),
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -120,6 +124,7 @@ class ApiClient {
     const response = await fetch(`${API_BASE_URL}/platforms/disconnect?platform=${platform}`, {
       method: 'POST',
       headers: this.getHeaders(true),
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -133,6 +138,7 @@ class ApiClient {
     const response = await fetch(`${API_BASE_URL}/publish`, {
       method: 'POST',
       headers: this.getHeaders(true),
+      credentials: 'include',
       body: JSON.stringify({ content, platforms }),
     });
 
@@ -147,6 +153,7 @@ class ApiClient {
   async getPublishHistory(): Promise<PublishJob[]> {
     const response = await fetch(`${API_BASE_URL}/publish/history`, {
       headers: this.getHeaders(true),
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -159,6 +166,7 @@ class ApiClient {
   async getJobStatus(jobId: string): Promise<JobStatus> {
     const response = await fetch(`${API_BASE_URL}/publish/job/${jobId}`, {
       headers: this.getHeaders(true),
+      credentials: 'include',
     });
 
     if (!response.ok) {
