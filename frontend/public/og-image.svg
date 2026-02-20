@@ -1,0 +1,34 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient background -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Broadcasting icon (centered left) -->
+  <g transform="translate(200, 315)">
+    <circle cx="0" cy="0" r="15" fill="white"/>
+    <path d="M -40 -40 Q -60 0 -40 40" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.9"/>
+    <path d="M 40 -40 Q 60 0 40 40" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.9"/>
+    <path d="M -65 -65 Q -90 0 -65 65" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 65 -65 Q 90 0 65 65" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path d="M -90 -90 Q -120 0 -90 90" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.3"/>
+    <path d="M 90 -90 Q 120 0 90 90" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.3"/>
+  </g>
+
+  <!-- Text -->
+  <text x="400" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="80" font-weight="700" fill="white">
+    Prasaran
+  </text>
+  <text x="400" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="36" fill="rgba(255, 255, 255, 0.9)">
+    Multi-Platform Publisher
+  </text>
+  <text x="400" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="rgba(255, 255, 255, 0.7)">
+    Publish to Manch, Adda, and Samooh from one place
+  </text>
+</svg>

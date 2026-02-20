@@ -85,6 +85,12 @@ export class DatabaseService implements OnModuleInit {
         FOREIGN KEY (user_id) REFERENCES users(id),
         UNIQUE(provider, provider_user_id)
       );
+
+      CREATE TABLE IF NOT EXISTS oauth_states (
+        state TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        created_at INTEGER NOT NULL
+      );
     `);
 
     // Seed platforms
