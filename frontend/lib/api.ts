@@ -3,6 +3,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/a
 export interface User {
   id: string;
   email: string;
+  picture?: string;
   isAdmin?: boolean;
   createdAt?: number;
 }
