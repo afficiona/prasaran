@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { api, Platform, PublishJob } from '@/lib/api';
+import { api, Platform, PublishJob, User } from '@/lib/api';
 import Link from 'next/link';
 
 function DashboardContent() {
@@ -16,7 +16,7 @@ function DashboardContent() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<{ email: string; id: string; picture?: string } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [disconnecting, setDisconnecting] = useState<string | null>(null);
   const [showDisconnectConfirm, setShowDisconnectConfirm] = useState<string | null>(null);
 
