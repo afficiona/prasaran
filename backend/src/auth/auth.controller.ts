@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards, Req, Res } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Req, Res, UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
@@ -32,5 +32,24 @@ export class AuthController {
     // Redirect to frontend with token
     const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3003';
     res.redirect(`${frontendUrl}/auth/callback?token=${token}`);
+  }
+
+  @Get('admin/users')
+  async getAllUsers(@Req() req: Request) {
+    // Extract and verify JWT token
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      throw new UnauthorizedException('No token provided');
+    }
+
+    const token = authHeader.split(' ')[1];
+    const decoded = this.authService.verifyToken(token) as any;
+
+    // Check if user is admin
+    if (!decoded.isAdmin) {
+      throw new UnauthorizedException('Admin access required');
+    }
+
+    return this.authService.getAllUsers();
   }
 }

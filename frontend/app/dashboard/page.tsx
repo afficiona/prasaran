@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { api, Platform, PublishJob } from '@/lib/api';
+import Link from 'next/link';
 
 function DashboardContent() {
   const router = useRouter();
@@ -164,6 +165,17 @@ function DashboardContent() {
             </h1>
           </div>
           <div className="flex items-center gap-4">
+            {user?.isAdmin && (
+              <Link
+                href="/admin"
+                className="px-4 py-2 text-sm font-semibold text-purple-600 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                Admin
+              </Link>
+            )}
             {user && (
               <div className="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-200">
                 {user.picture ? (

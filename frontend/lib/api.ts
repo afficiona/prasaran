@@ -3,6 +3,8 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/a
 export interface User {
   id: string;
   email: string;
+  isAdmin?: boolean;
+  createdAt?: number;
 }
 
 export interface AuthResponse {
@@ -183,11 +185,40 @@ class ApiClient {
 
   getCurrentUser(): User | null {
     const userStr = localStorage.getItem('prasaran_user');
-    return userStr ? JSON.parse(userStr) : null;
+    if (!userStr) return null;
+
+    const user = JSON.parse(userStr);
+
+    // Decode token to get isAdmin flag
+    const token = localStorage.getItem('prasaran_token');
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        user.isAdmin = payload.isAdmin || false;
+      } catch (e) {
+        // Invalid token, ignore
+      }
+    }
+
+    return user;
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('prasaran_token');
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    const response = await fetch(`${API_BASE_URL}/auth/admin/users`, {
+      headers: this.getHeaders(true),
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to fetch users');
+    }
+
+    return response.json();
   }
 }
 

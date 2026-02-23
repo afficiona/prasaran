@@ -67,7 +67,7 @@ export class AuthService {
 
     if (oauthProvider) {
       // User already linked with Google, return existing user
-      const user = db.prepare('SELECT id, email FROM users WHERE id = ?').get(oauthProvider.user_id) as any;
+      const user = db.prepare('SELECT id, email, is_admin FROM users WHERE id = ?').get(oauthProvider.user_id) as any;
       return {
         ...user,
         picture: profile.picture,
@@ -116,7 +116,7 @@ export class AuthService {
   generateJwtToken(user: any): string {
     const jwtSecret = this.configService.get<string>('JWT_SECRET') || 'prasaran-jwt-secret-change-in-production';
     return jwt.sign(
-      { userId: user.id, email: user.email, picture: user.picture },
+      { userId: user.id, email: user.email, picture: user.picture, isAdmin: user.is_admin === 1 },
       jwtSecret,
       { expiresIn: '7d' }
     );
@@ -133,7 +133,23 @@ export class AuthService {
 
   getUserById(userId: string) {
     const db = this.databaseService.getDb();
-    const user = db.prepare('SELECT id, email FROM users WHERE id = ?').get(userId) as any;
+    const user = db.prepare('SELECT id, email, is_admin FROM users WHERE id = ?').get(userId) as any;
     return user;
+  }
+
+  getAllUsers() {
+    const db = this.databaseService.getDb();
+    const users = db.prepare(`
+      SELECT id, email, is_admin, created_at
+      FROM users
+      ORDER BY created_at DESC
+    `).all() as any[];
+
+    return users.map(user => ({
+      id: user.id,
+      email: user.email,
+      isAdmin: user.is_admin === 1,
+      createdAt: user.created_at
+    }));
   }
 }

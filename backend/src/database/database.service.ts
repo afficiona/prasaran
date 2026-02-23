@@ -23,6 +23,7 @@ export class DatabaseService implements OnModuleInit {
         id TEXT PRIMARY KEY,
         email TEXT UNIQUE NOT NULL,
         password_hash TEXT NOT NULL,
+        is_admin INTEGER DEFAULT 0,
         created_at INTEGER NOT NULL
       );
 
