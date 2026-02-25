@@ -23,6 +23,7 @@
     "bcrypt": "^6.0.0",
     "better-sqlite3": "^12.6.2",
     "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^8.0.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "reflect-metadata": "^0.2.2",
@@ -36,6 +37,7 @@
     "@types/better-sqlite3": "^7.6.13",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.2.3",
+    "@types/nodemailer": "^7.0.11",
     "@types/passport-google-oauth20": "^2.0.16",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"

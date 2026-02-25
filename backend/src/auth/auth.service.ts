@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DatabaseService } from '../database/database.service';
+import { NotificationService } from '../notification/notification.service';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { randomUUID } from 'crypto';
@@ -10,6 +11,7 @@ export class AuthService {
   constructor(
     private databaseService: DatabaseService,
     private configService: ConfigService,
+    private notificationService: NotificationService,
   ) {}
 
   async register(email: string, password: string) {
@@ -22,6 +24,8 @@ export class AuthService {
         INSERT INTO users (id, email, password_hash, created_at)
         VALUES (?, ?, ?, ?)
       `).run(userId, email, passwordHash, Date.now());
+
+      this.notificationService.sendNewUserNotification(email, 'email');
 
       return { userId, email };
     } catch (error) {
@@ -105,6 +109,8 @@ export class AuthService {
       INSERT INTO user_oauth_providers (id, user_id, provider, provider_user_id, email, created_at)
       VALUES (?, ?, ?, ?, ?, ?)
     `).run(randomUUID(), userId, 'google', profile.googleId, profile.email, Date.now());
+
+    this.notificationService.sendNewUserNotification(profile.email, 'google');
 
     return {
       id: userId,
